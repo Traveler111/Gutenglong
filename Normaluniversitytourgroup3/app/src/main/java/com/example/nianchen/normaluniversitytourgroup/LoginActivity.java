@@ -3,6 +3,8 @@ package com.example.nianchen.normaluniversitytourgroup;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -11,11 +13,43 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.nianchen.normaluniversitytourgroup.page_activity.RegistActivity;
+import com.hyphenate.EMCallBack;
+import com.hyphenate.EMError;
+import com.hyphenate.chat.EMClient;
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.AsyncHttpResponseHandler;
+import com.loopj.android.http.JsonHttpResponseHandler;
+import com.loopj.android.http.RequestParams;
+import com.loopj.android.http.ResponseHandlerInterface;
+
+import org.apache.http.Header;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class LoginActivity extends AppCompatActivity {
     private Button Btlogin;
     private EditText EtUname;
     private EditText EtPwd;
-    private ProgressDialog pb;
+    private Button Btnregist;
+    private String loginuri="http://123.207.228.232/blog/loginuser";
+    private Handler myhandler=new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            if(loginresult.equals("loginok")){
+                Intent i = new Intent(LoginActivity.this, MainActivity.class);
+                startActivity(i);
+                LoginActivity.this.finish();
+            }
+            else {
+                Toast.makeText(LoginActivity.this, "登入失败",Toast.LENGTH_LONG).show();
+            }
+        }
+    };
+    private String name;
+    private String password;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,39 +63,31 @@ public class LoginActivity extends AppCompatActivity {
         Btlogin = (Button)findViewById(R.id.btlogin);
         EtUname = (EditText) findViewById(R.id.Etu);
         EtPwd = (EditText) findViewById(R.id.Pw);
+        Btnregist=(Button)findViewById(R.id.regist);
     }
+
+    private String loginresult;
+    private JSONObject result;
+    private ProgressDialog mDialog;
     View.OnClickListener mylistener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             switch (v.getId()) {
                 case R.id.btlogin:
-                    Intent i = new Intent(LoginActivity.this, MainActivity.class);
-                    i.putExtra("NAME", EtUname.getText().toString());
-                    i.putExtra("PWD", EtPwd.getText().toString());
-                    startActivityForResult(i,1);
+                    login();
+                    loginhx();
+                   break;
+                case R.id.regist:
+                    Intent ina=new Intent(LoginActivity.this, RegistActivity.class);
+                    startActivity(ina);
                     break;
             }
         }
     };
     private void setListener() {
         Btlogin.setOnClickListener(mylistener);
+        Btnregist.setOnClickListener(mylistener);
     }
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == 1) {
-            Toast.makeText(LoginActivity.this, "用户名密码正确", Toast.LENGTH_SHORT).show();
-        }
-        else{
-            Toast.makeText(LoginActivity.this, "用户名密码错误", Toast.LENGTH_SHORT).show();
-        }
-    }
-
-    @Override
-    public boolean onTouchEvent(MotionEvent event) {
-        return super.onTouchEvent(event);
-    }
-
 
     @Override
     protected void onStop() {
@@ -98,6 +124,112 @@ public class LoginActivity extends AppCompatActivity {
         super.onRestart();
         Log.e("log","onRestart");
     }
+    public void login(){
+        mDialog = new ProgressDialog(LoginActivity.this);
+        mDialog.setMessage("正在登陆，请稍后...");
+        mDialog.show();
+         name=EtUname.getText().toString();
+          password=EtPwd.getText().toString();
+        AsyncHttpClient client=new AsyncHttpClient();
+        RequestParams params=new RequestParams();
+        params.put("username",name);
+        params.put("password",password);
+        client.post(loginuri, params, new AsyncHttpResponseHandler() {
+                    @Override
+                    public void onSuccess(int i, Header[] headers, byte[] bytes) {
+                        byte [] mybytes=bytes;
+                        loginresult=new String (mybytes);
+                        Message msg=new Message();
+                        myhandler.sendMessage(msg);
+                        Log.e(loginresult,"this is");
 
+                    }
+                    @Override
+                    public void onFailure(int i, Header[] headers, byte[] bytes, Throwable throwable) {
+                        Toast.makeText(LoginActivity.this,"您的网络有异常",Toast.LENGTH_LONG).show();
+                    }
+                }
+
+
+        );
+    }
+    public void loginhx(){
+        EMClient.getInstance().login(name, password, new EMCallBack() {
+            @Override
+            public void onSuccess() {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        mDialog.dismiss();
+                        // 加载所有会话到内存
+                        EMClient.getInstance().chatManager().loadAllConversations();
+
+                    }
+                });
+            }
+
+
+            @Override
+            public void onError(final int i, final String s) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        mDialog.dismiss();
+                        Log.d("lzan13", "登录失败 Error code:" + i + ", message:" + s);
+                        /**
+                         * 关于错误码可以参考官方api详细说明
+                         * http://www.easemob.com/apidoc/android/chat3.0/classcom_1_1hyphenate_1_1_e_m_error.html
+                         */
+                        switch (i) {
+                            // 网络异常 2
+                            case EMError.NETWORK_ERROR:
+                                Toast.makeText(LoginActivity.this, "网络错误 code: " + i + ", message:" + s, Toast.LENGTH_LONG).show();
+                                break;
+                            // 无效的用户名 101
+                            case EMError.INVALID_USER_NAME:
+                                Toast.makeText(LoginActivity.this, "无效的用户名 code: " + i + ", message:" + s, Toast.LENGTH_LONG).show();
+                                break;
+                            // 无效的密码 102
+                            case EMError.INVALID_PASSWORD:
+                                Toast.makeText(LoginActivity.this, "无效的密码 code: " + i + ", message:" + s, Toast.LENGTH_LONG).show();
+                                break;
+                            // 用户认证失败，用户名或密码错误 202
+                            case EMError.USER_AUTHENTICATION_FAILED:
+                                Toast.makeText(LoginActivity.this, "用户认证失败，用户名或密码错误 code: " + i + ", message:" + s, Toast.LENGTH_LONG).show();
+                                break;
+                            // 用户不存在 204
+                            case EMError.USER_NOT_FOUND:
+                                Toast.makeText(LoginActivity.this, "用户不存在 code: " + i + ", message:" + s, Toast.LENGTH_LONG).show();
+                                break;
+                            // 无法访问到服务器 300
+                            case EMError.SERVER_NOT_REACHABLE:
+                                Toast.makeText(LoginActivity.this, "无法访问到服务器 code: " + i + ", message:" + s, Toast.LENGTH_LONG).show();
+                                break;
+                            // 等待服务器响应超时 301
+                            case EMError.SERVER_TIMEOUT:
+                                Toast.makeText(LoginActivity.this, "等待服务器响应超时 code: " + i + ", message:" + s, Toast.LENGTH_LONG).show();
+                                break;
+                            // 服务器繁忙 302
+                            case EMError.SERVER_BUSY:
+                                Toast.makeText(LoginActivity.this, "服务器繁忙 code: " + i + ", message:" + s, Toast.LENGTH_LONG).show();
+                                break;
+                            // 未知 Server 异常 303 一般断网会出现这个错误
+                            case EMError.SERVER_UNKNOWN_ERROR:
+                                Toast.makeText(LoginActivity.this, "未知的服务器异常 code: " + i + ", message:" + s, Toast.LENGTH_LONG).show();
+                                break;
+                            default:
+                                Toast.makeText(LoginActivity.this, "ml_sign_in_failed code: " + i + ", message:" + s, Toast.LENGTH_LONG).show();
+                                break;
+                        }
+                    }
+                });
+            }
+
+            @Override
+            public void onProgress(int i, String s) {
+
+            }
+        });
+    }
 
 }

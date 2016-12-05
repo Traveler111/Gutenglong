@@ -10,10 +10,20 @@
         android:gravity="center"
         android:textColor="#fff"
         android:text="风景图库"/>
-    <TableLayout
+    <GridView
+        android:id="@+id/gallery"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:horizontalSpacing="1pt"
+        android:verticalSpacing="1pt"
+        android:numColumns="3"
+        android:gravity="center"></GridView>
+    <ImageView
+        android:id="@+id/mautos"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:completionThreshold="1"/>
 
-    </TableLayout>
+
 
 </LinearLayout>

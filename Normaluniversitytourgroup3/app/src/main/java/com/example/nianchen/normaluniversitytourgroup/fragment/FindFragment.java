@@ -54,11 +54,11 @@ public class FindFragment extends Fragment {
         Log.e("find","run");
     }
     public void getdata(){
-        friends.add(new FriendOne(R.drawable.a1,"雷达加朋友","添加身边的朋友"));
-        friends.add(new FriendOne(R.drawable.a1,"面对面加群","与身边的朋友进入同一个群聊"));
-        friends.add(new FriendOne(R.drawable.a1,"扫一扫","扫描二维码名片"));
-        friends.add(new FriendOne(R.drawable.a1,"手机联系人","邀请通讯录中的好友"));
-        friends.add(new FriendOne(R.drawable.a2,"李佳航","人是个神马东西"));
+        friends.add(new FriendOne(R.drawable.lei,"雷达加朋友","添加身边的朋友"));
+        friends.add(new FriendOne(R.drawable.jia,"面对面加群","与身边的朋友进入同一个群聊"));
+        friends.add(new FriendOne(R.drawable.sao,"扫一扫","扫描二维码名片"));
+        friends.add(new FriendOne(R.drawable.shou,"手机联系人","邀请通讯录中的好友"));
+        friends.add(new FriendOne(R.drawable.gong,"公众号","获取更多资源和服务"));
         Log.e("getdata","run");
     }
 }
