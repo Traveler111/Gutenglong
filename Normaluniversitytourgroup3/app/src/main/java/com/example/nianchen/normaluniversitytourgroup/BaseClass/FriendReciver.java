@@ -1,23 +1,19 @@
 package com.example.nianchen.normaluniversitytourgroup.BaseClass;
 
+import android.app.AlertDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.nianchen.normaluniversitytourgroup.R;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.exceptions.HyphenateException;
-
-import java.util.zip.Inflater;
 
 /**
  * Created by zhangzhixin on 2016/12/5.

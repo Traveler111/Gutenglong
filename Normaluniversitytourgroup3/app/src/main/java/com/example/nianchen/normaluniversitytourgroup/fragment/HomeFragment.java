@@ -7,6 +7,7 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ViewFlipper;
@@ -35,6 +36,7 @@ public class HomeFragment extends Fragment {
     private int[] resId = {R.drawable.a1,R.drawable.a2,R.drawable.a3,R.drawable.a4};
     private View view;
     private Intent i = new Intent();
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -103,13 +105,19 @@ public class HomeFragment extends Fragment {
             }
         });
         chat.setOnClickListener(new View.OnClickListener() {
+            public ImageButton image_home;
+            public ImageButton image_mes;
             private MesFragment mMes;
             android.app.FragmentManager fm = getFragmentManager();
             android.app.FragmentTransaction transaction = fm.beginTransaction();
             @Override
             public void onClick(View v) {
+                image_mes =(ImageButton) view.findViewById(R.id.image_mes) ;
+                image_home = (ImageButton) view.findViewById(R.id.image_home) ;
                 mMes = new MesFragment();
                 transaction.replace(R.id.contaner, mMes);
+//                image_home.setImageResource(R.drawable.home1);
+//                image_mes.setImageResource(R.drawable.mess2);
                 transaction.commit();
             }
         });

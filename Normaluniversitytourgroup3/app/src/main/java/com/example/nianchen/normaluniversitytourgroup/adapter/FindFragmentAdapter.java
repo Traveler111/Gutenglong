@@ -12,6 +12,7 @@ import com.example.nianchen.normaluniversitytourgroup.BaseClass.FriendOne;
 import com.example.nianchen.normaluniversitytourgroup.BaseClass.Myfriendzzx;
 import com.example.nianchen.normaluniversitytourgroup.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**

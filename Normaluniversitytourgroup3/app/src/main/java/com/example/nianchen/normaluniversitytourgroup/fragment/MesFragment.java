@@ -82,7 +82,7 @@ public class MesFragment extends Fragment{
                 .setIndicator("联系人")
                 .setContent(R.id.tab002);
         tabHost.addTab(tab002);
-        if (getId()==R.id.btn_mes){
+        if (getId()==R.id.liner_mes){
             tabHost.addTab(tab001);
             tabHost.addTab(tab002);
         }else if (getId() == R.id.chat){

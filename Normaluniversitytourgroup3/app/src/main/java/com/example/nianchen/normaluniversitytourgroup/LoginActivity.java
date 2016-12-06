@@ -2,6 +2,7 @@ package com.example.nianchen.normaluniversitytourgroup;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -83,7 +84,12 @@ public class LoginActivity extends AppCompatActivity {
                     mDialog.show();
                     login();
                     loginhx();
-                   break;
+                    SharedPreferences spf=getSharedPreferences("User",MODE_PRIVATE);
+                    SharedPreferences.Editor editor=spf.edit();
+                    editor.putString("uname",EtUname.getText().toString());
+                    editor.clear();
+                    editor.commit();
+                    break;
                 case R.id.regist:
                     Intent ina=new Intent(LoginActivity.this, RegistActivity.class);
                     startActivity(ina);
@@ -132,8 +138,8 @@ public class LoginActivity extends AppCompatActivity {
         Log.e("log","onRestart");
     }
     public void login(){
-         name=EtUname.getText().toString();
-          password=EtPwd.getText().toString();
+        name=EtUname.getText().toString();
+        password=EtPwd.getText().toString();
         AsyncHttpClient client=new AsyncHttpClient();
         RequestParams params=new RequestParams();
         params.put("username",name);

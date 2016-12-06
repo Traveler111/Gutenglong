@@ -2,6 +2,7 @@ package com.example.nianchen.normaluniversitytourgroup.fragment;
 
 import android.app.Fragment;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -11,6 +12,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.TextView;
@@ -18,6 +20,7 @@ import android.widget.Toast;
 
 import com.example.nianchen.normaluniversitytourgroup.BaseClass.FriendOne;
 import com.example.nianchen.normaluniversitytourgroup.BaseClass.Myfriendzzx;
+import com.example.nianchen.normaluniversitytourgroup.MainActivityDitu;
 import com.example.nianchen.normaluniversitytourgroup.R;
 import com.example.nianchen.normaluniversitytourgroup.adapter.FindFragmentAdapter;
 import com.hyphenate.chat.EMClient;
@@ -35,6 +38,7 @@ import java.util.List;
  * Created by nianchen on 2016/11/22.
  */
 public class FindFragment extends Fragment {
+    private Button btn;
     private List<Myfriendzzx> friends=new ArrayList<Myfriendzzx>();
     private View view;
     private ListView lv;
@@ -87,7 +91,7 @@ public class FindFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-         view = inflater.inflate(R.layout.fragment_find, container, false);
+        view = inflater.inflate(R.layout.fragment_find, container, false);
 //        ListView list = (ListView) view.findViewById(R.id.findlist);
 //        List<Map<String,Object>> listItems1 = new ArrayList<Map<String,Object>>();
 //        for (int i=0;i<name1.length;i++){
@@ -102,26 +106,35 @@ public class FindFragment extends Fragment {
 //                new String[]{"name1","hearder1","desc1"},
 //                new int[]{R.id.name1 ,R.id.hearder1, R.id.desc1});
 //        list.setAdapter(simpleAdapter);
-      //  getdata();
+        //  getdata();
         findview();
         getfriendlist();
         searchfriend();
         myadapter=new FindFragmentAdapter(getActivity(),friends);
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i=new Intent();
+                i.setClass(getActivity(), MainActivityDitu.class);
+                startActivity(i);
+            }
+        });
         lv.setAdapter(myadapter);
+
         return view;
     }
     public void findview(){
         lv=(ListView)view.findViewById(R.id.findlist);
+        btn=(Button)view.findViewById(R.id.btn);
         search=(SearchView)view.findViewById(R.id.search);
-
         Log.e("find","run");
     }
     public void getdata(){
-      //  friends.add(new FriendOne(R.drawable.a1,"雷达加朋友","添加身边的朋友"));
-       // friends.add(new FriendOne(R.drawable.a1,"面对面加群","与身边的朋友进入同一个群聊"));
-       // friends.add(new FriendOne(R.drawable.a1,"扫一扫","扫描二维码名片"));
-       // friends.add(new FriendOne(R.drawable.a1,"手机联系人","邀请通讯录中的好友"));
-       // friends.add(new FriendOne(R.drawable.a2,"李佳航","人是个神马东西"));
+        //  friends.add(new FriendOne(R.drawable.a1,"雷达加朋友","添加身边的朋友"));
+        // friends.add(new FriendOne(R.drawable.a1,"面对面加群","与身边的朋友进入同一个群聊"));
+        // friends.add(new FriendOne(R.drawable.a1,"扫一扫","扫描二维码名片"));
+        // friends.add(new FriendOne(R.drawable.a1,"手机联系人","邀请通讯录中的好友"));
+        // friends.add(new FriendOne(R.drawable.a2,"李佳航","人是个神马东西"));
         Log.e("getdata","run");
     }
     public void searchfriend(){
@@ -152,7 +165,7 @@ public class FindFragment extends Fragment {
 
                     }
                 });
-               return true;
+                return true;
             }
 
             @Override
@@ -162,21 +175,21 @@ public class FindFragment extends Fragment {
         });
     }
     public void getfriendlist(){
-         Thread th=new Thread(){
-             @Override
-             public void run() {
-                 super.run();
-                 try {
-                     List<String> usernames = EMClient.getInstance().contactManager().getAllContactsFromServer();
-                     Message msg=new Message();
-                     msg.obj=usernames;
-                     getfriendhandler.sendMessage(msg);
-                     Log.e("getfriendlist","run");
-                 } catch (HyphenateException e) {
-                     e.printStackTrace();
-                 }
-             }
-         };
+        Thread th=new Thread(){
+            @Override
+            public void run() {
+                super.run();
+                try {
+                    List<String> usernames = EMClient.getInstance().contactManager().getAllContactsFromServer();
+                    Message msg=new Message();
+                    msg.obj=usernames;
+                    getfriendhandler.sendMessage(msg);
+                    Log.e("getfriendlist","run");
+                } catch (HyphenateException e) {
+                    e.printStackTrace();
+                }
+            }
+        };
         th.start();
 
     }
