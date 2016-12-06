@@ -1,8 +1,13 @@
 apply plugin: 'com.android.application'
 
 android {
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
+        }
+    }
     compileSdkVersion 24
-    buildToolsVersion "24.0.2"
+    buildToolsVersion "24.0.1"
 
     defaultConfig {
         applicationId "com.example.nianchen.normaluniversitytourgroup"
@@ -30,4 +35,5 @@ dependencies {
     compile 'com.android.support:appcompat-v7:24.2.1'
     compile files('libs/android-async-http-1.4.8.jar')
     compile files('libs/hyphenatechat_3.2.1.jar')
+    compile files('libs/BaiduLBS_Android.jar')
 }

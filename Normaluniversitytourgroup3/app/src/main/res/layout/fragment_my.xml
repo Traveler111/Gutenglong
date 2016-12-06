@@ -61,5 +61,14 @@
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
-
+    <Button
+        android:id="@+id/btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="我加入的队伍"/>
+    <Button
+        android:id="@+id/exit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="退出登入"/>
 </LinearLayout>

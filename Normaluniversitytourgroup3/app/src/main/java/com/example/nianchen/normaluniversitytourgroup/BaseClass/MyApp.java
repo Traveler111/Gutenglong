@@ -14,6 +14,7 @@ import java.util.List;
  * Created by zhangzhixin on 2016/11/29.
  */
 public class MyApp extends Application {
+    private static Context context;
     // 上下文菜单
     private Context mContext;
 
@@ -24,11 +25,13 @@ public class MyApp extends Application {
     public void onCreate() {
         super.onCreate();
         mContext = this;
-
+        MyApp.context = getApplicationContext();
         // 初始化环信SDK
         initEasemob();
     }
-
+    public static Context getAppContext() {
+        return MyApp.context;
+    }
     /**
      *
      */

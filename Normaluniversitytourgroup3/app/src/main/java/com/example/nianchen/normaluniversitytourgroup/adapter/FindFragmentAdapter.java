@@ -9,21 +9,23 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.nianchen.normaluniversitytourgroup.BaseClass.FriendOne;
+import com.example.nianchen.normaluniversitytourgroup.BaseClass.Myfriendzzx;
 import com.example.nianchen.normaluniversitytourgroup.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by nianchen on 2016/11/24.
  */
 public class FindFragmentAdapter extends BaseAdapter {
-    private List <FriendOne> friends;
+    private List <Myfriendzzx> friends;
     private Context c;
     private ImageView img;
     private TextView name;
     private TextView desc;
 
-    public FindFragmentAdapter(Context c, List<FriendOne> friends) {
+    public FindFragmentAdapter(Context c, List<Myfriendzzx> friends) {
         this.c = c;
         this.friends = friends;
     }
@@ -52,8 +54,7 @@ public class FindFragmentAdapter extends BaseAdapter {
         img.setImageResource(friends.get(position).getImg());//fuzhi
         name=(TextView) convertView.findViewById(R.id.name1);
         name.setText(friends.get(position).getName().toString());
-        desc=(TextView)convertView.findViewById(R.id.desc1);
-        desc.setText(friends.get(position).getMisoshu().toString());
+
         return convertView;
     }
 }
