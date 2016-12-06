@@ -35,6 +35,7 @@
         <activity android:name=".page_activity.GroupActivity"/>
         <activity android:name=".page_activity.TravelersActivity"/>
         <activity android:name=".page_activity.StrategyActivity"/>
+        <activity android:name=".page_activity.ChatActivity"/>
         <activity android:name=".page_activity.OppositeActivity"/>
         <activity android:name=".page_activity.GalleryActivity"/>
         <activity android:name=".page_activity.FootActivity"/>
@@ -53,6 +54,17 @@
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED"/>
                 <action android:name="android.intent.action.USER_PRESENT" />
+            </intent-filter>
+        </receiver>
+        <receiver
+            android:name=".BaseClass.FriendReciver"
+            android:enabled="true"
+            android:exported="true">
+            <!-- 静态注册广播 -->
+            <!-- intent过滤器,指定可以匹配哪些intent, 一般需要定义action 可以是自定义的也可是系统的 -->
+            <intent-filter>
+                <!--action-->
+                <action android:name="com.broadcast.test" />
             </intent-filter>
         </receiver>
     </application>

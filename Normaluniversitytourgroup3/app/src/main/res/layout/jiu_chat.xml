@@ -9,11 +9,8 @@
         android:textSize="33dp"
         android:gravity="center"
         android:textColor="#fff"
-        android:text="风景图库"/>
-    <TableLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:text="友聊"/>
+    <!--友聊-->
 
-    </TableLayout>
 
 </LinearLayout>

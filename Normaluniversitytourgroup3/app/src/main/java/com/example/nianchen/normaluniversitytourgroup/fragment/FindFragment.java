@@ -1,17 +1,32 @@
 package com.example.nianchen.normaluniversitytourgroup.fragment;
 
 import android.app.Fragment;
+import android.content.DialogInterface;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.SearchView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.nianchen.normaluniversitytourgroup.BaseClass.FriendOne;
+import com.example.nianchen.normaluniversitytourgroup.BaseClass.Myfriendzzx;
 import com.example.nianchen.normaluniversitytourgroup.R;
 import com.example.nianchen.normaluniversitytourgroup.adapter.FindFragmentAdapter;
+import com.hyphenate.chat.EMClient;
+import com.hyphenate.exceptions.HyphenateException;
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.AsyncHttpResponseHandler;
+import com.loopj.android.http.RequestParams;
+
+import org.apache.http.Header;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,10 +35,54 @@ import java.util.List;
  * Created by nianchen on 2016/11/22.
  */
 public class FindFragment extends Fragment {
-    private List<FriendOne> friends=new ArrayList<FriendOne>();
+    private List<Myfriendzzx> friends=new ArrayList<Myfriendzzx>();
     private View view;
     private ListView lv;
     private FindFragmentAdapter myadapter;
+    private SearchView search;
+    private String findresult;
+    private Handler getfriendhandler=new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            List <Myfriendzzx>friends1=new ArrayList<>();
+            List <String> lists= (List<String>) msg.obj;
+            for(int i=0;i<lists.size();i++){
+                friends1.add(new Myfriendzzx(lists.get(i),R.drawable.loginhead));
+                Log.e(""+lists.get(i),"get");
+            }
+            friends.clear();
+            friends.addAll(friends1);
+            myadapter.notifyDataSetChanged();
+        }
+    };
+    private Handler myhandler=new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            final String str=(String )msg.obj;
+            AlertDialog.Builder adb=new AlertDialog.Builder(getActivity());
+            View view=getActivity().getLayoutInflater().inflate(R.layout.findfriend,null);
+            adb.setView(view);
+            adb.setTitle("寻找朋友");
+            TextView name=(TextView)view.findViewById(R.id.username);
+            name.setText(str);
+            adb.setPositiveButton("加为好友", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+
+                    try {
+                        EMClient.getInstance().contactManager().addContact(str, "做个朋友吧");
+                    } catch (HyphenateException e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
+            adb.setNegativeButton("取消",null);
+            adb.create().show();
+        }
+    };
+
 
     @Nullable
     @Override
@@ -43,22 +102,82 @@ public class FindFragment extends Fragment {
 //                new String[]{"name1","hearder1","desc1"},
 //                new int[]{R.id.name1 ,R.id.hearder1, R.id.desc1});
 //        list.setAdapter(simpleAdapter);
-        getdata();
+      //  getdata();
         findview();
+        getfriendlist();
+        searchfriend();
         myadapter=new FindFragmentAdapter(getActivity(),friends);
         lv.setAdapter(myadapter);
         return view;
     }
     public void findview(){
         lv=(ListView)view.findViewById(R.id.findlist);
+        search=(SearchView)view.findViewById(R.id.search);
+
         Log.e("find","run");
     }
     public void getdata(){
-        friends.add(new FriendOne(R.drawable.lei,"雷达加朋友","添加身边的朋友"));
-        friends.add(new FriendOne(R.drawable.jia,"面对面加群","与身边的朋友进入同一个群聊"));
-        friends.add(new FriendOne(R.drawable.sao,"扫一扫","扫描二维码名片"));
-        friends.add(new FriendOne(R.drawable.shou,"手机联系人","邀请通讯录中的好友"));
-        friends.add(new FriendOne(R.drawable.gong,"公众号","获取更多资源和服务"));
+      //  friends.add(new FriendOne(R.drawable.a1,"雷达加朋友","添加身边的朋友"));
+       // friends.add(new FriendOne(R.drawable.a1,"面对面加群","与身边的朋友进入同一个群聊"));
+       // friends.add(new FriendOne(R.drawable.a1,"扫一扫","扫描二维码名片"));
+       // friends.add(new FriendOne(R.drawable.a1,"手机联系人","邀请通讯录中的好友"));
+       // friends.add(new FriendOne(R.drawable.a2,"李佳航","人是个神马东西"));
         Log.e("getdata","run");
+    }
+    public void searchfriend(){
+        search.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(final String query) {
+                if(query==null){
+                    Toast.makeText(getActivity(),"好友不可为空",Toast.LENGTH_LONG).show();
+                    return false;
+                }
+                AsyncHttpClient client=new AsyncHttpClient();
+                String str="http://123.207.228.232/blog/findfriend";
+                RequestParams params=new RequestParams();
+                params.put("username",query);
+                client.get(str, params, new AsyncHttpResponseHandler() {
+                    @Override
+                    public void onSuccess(int i, Header[] headers, byte[] bytes) {
+                        byte [] mybytes=bytes;
+                        findresult=new String (mybytes);
+                        Message msg=new Message();
+                        msg.obj=query;
+                        myhandler.sendMessage(msg);
+
+                    }
+
+                    @Override
+                    public void onFailure(int i, Header[] headers, byte[] bytes, Throwable throwable) {
+
+                    }
+                });
+               return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+        });
+    }
+    public void getfriendlist(){
+         Thread th=new Thread(){
+             @Override
+             public void run() {
+                 super.run();
+                 try {
+                     List<String> usernames = EMClient.getInstance().contactManager().getAllContactsFromServer();
+                     Message msg=new Message();
+                     msg.obj=usernames;
+                     getfriendhandler.sendMessage(msg);
+                     Log.e("getfriendlist","run");
+                 } catch (HyphenateException e) {
+                     e.printStackTrace();
+                 }
+             }
+         };
+        th.start();
+
     }
 }

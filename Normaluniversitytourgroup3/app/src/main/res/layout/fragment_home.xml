@@ -23,7 +23,7 @@
             android:layout_width="110dp"
             android:layout_height="wrap_content"
             android:background="#f6ff0095"
-            android:paddingLeft="28dp"
+            android:paddingLeft="35dp"
             android:layout_marginLeft="13dp"
             android:paddingRight="35dp"
             android:paddingTop="1dp"
@@ -32,14 +32,13 @@
                 android:paddingTop="15dp"
                 android:layout_width="52dp"
                 android:layout_height="52dp"
-                android:src="@drawable/jiu1"/>
+                android:src="@drawable/a1"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingTop="2dp"
                 android:paddingLeft="0dp"
                 android:paddingBottom="12dp"
-                android:layout_gravity="center"
                 android:textSize="20dp"
                 android:textColor="#000"
                 android:text="组团"/>
@@ -59,13 +58,13 @@
                 android:paddingTop="15dp"
                 android:layout_width="52dp"
                 android:layout_height="52dp"
-                android:layout_gravity="center"
-                android:src="@drawable/jiu2"/>
+                android:layout_marginLeft="30dp"
+                android:src="@drawable/a1"/>
             <TextView
                 android:layout_width="70dp"
                 android:layout_height="wrap_content"
                 android:paddingTop="2dp"
-                android:layout_gravity="center"
+                android:layout_marginLeft="20dp"
                 android:paddingBottom="12dp"
                 android:textSize="20dp"
                 android:textColor="#000"
@@ -83,16 +82,16 @@
             android:paddingBottom="1dp">
             <ImageView
                 android:paddingTop="15dp"
-                android:layout_gravity="center"
+                android:layout_marginLeft="30dp"
                 android:layout_width="52dp"
                 android:layout_height="52dp"
-                android:src="@drawable/jiu33"/>
+                android:src="@drawable/a1"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingTop="2dp"
+                android:layout_marginLeft="13dp"
                 android:paddingBottom="12dp"
-                android:layout_gravity="center"
                 android:textSize="20dp"
                 android:textColor="#000"
                 android:text="游记攻略"/>
@@ -114,18 +113,18 @@
             android:paddingTop="1dp"
             android:paddingBottom="1dp">
             <ImageView
-                android:layout_gravity="center"
+                android:layout_marginLeft="30dp"
                 android:paddingTop="15dp"
                 android:layout_width="52dp"
                 android:layout_height="52dp"
-                android:src="@drawable/jiu4"/>
+                android:src="@drawable/a1"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingTop="2dp"
                 android:paddingLeft="0dp"
                 android:paddingBottom="12dp"
-                android:layout_gravity="center"
+                android:layout_marginLeft="25dp"
                 android:textSize="20dp"
                 android:textColor="#000"
                 android:text="异性游"/>
@@ -137,7 +136,7 @@
             android:layout_width="110dp"
             android:layout_height="wrap_content"
             android:background="#f6c800ff"
-            android:paddingLeft="28dp"
+            android:paddingLeft="35dp"
             android:layout_marginLeft="13dp"
             android:paddingRight="35dp"
             android:paddingTop="1dp"
@@ -146,14 +145,13 @@
                 android:paddingTop="15dp"
                 android:layout_width="52dp"
                 android:layout_height="52dp"
-                android:src="@drawable/jiu55"/>
+                android:src="@drawable/a1"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingTop="2dp"
                 android:paddingLeft="0dp"
                 android:paddingBottom="12dp"
-                android:layout_gravity="center"
                 android:textSize="20dp"
                 android:textColor="#000"
                 android:text="友聊"/>
@@ -170,17 +168,17 @@
             android:paddingBottom="1dp">
             <ImageView
                 android:paddingTop="15dp"
-                android:layout_gravity="center"
+                android:layout_marginLeft="30dp"
                 android:layout_width="52dp"
                 android:layout_height="52dp"
-                android:src="@drawable/jiu6"/>
+                android:src="@drawable/a1"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingTop="2dp"
                 android:paddingLeft="0dp"
                 android:paddingBottom="12dp"
-                android:layout_gravity="center"
+                android:layout_marginLeft="15dp"
                 android:textSize="20dp"
                 android:textColor="#000"
                 android:text="风景图库"/>
@@ -198,7 +196,7 @@
             android:layout_width="110dp"
             android:layout_height="wrap_content"
             android:background="#f6ff0095"
-            android:paddingLeft="28dp"
+            android:paddingLeft="35dp"
             android:layout_marginLeft="13dp"
             android:paddingRight="35dp"
             android:paddingTop="1dp"
@@ -207,14 +205,13 @@
                 android:paddingTop="15dp"
                 android:layout_width="52dp"
                 android:layout_height="52dp"
-                android:src="@drawable/jiu8"/>
+                android:src="@drawable/a1"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingTop="2dp"
                 android:paddingLeft="0dp"
                 android:paddingBottom="12dp"
-                android:layout_gravity="center"
                 android:textSize="20dp"
                 android:textColor="#000"
                 android:text="徒步"/>
@@ -226,23 +223,22 @@
             android:layout_width="110dp"
             android:layout_height="wrap_content"
             android:background="#f600b7ff"
-            android:paddingLeft="28dp"
+            android:paddingLeft="35dp"
             android:layout_marginLeft="13dp"
             android:paddingRight="35dp"
             android:paddingTop="1dp"
             android:paddingBottom="1dp">
             <ImageView
                 android:paddingTop="15dp"
-                android:layout_width="55dp"
+                android:layout_width="52dp"
                 android:layout_height="52dp"
-                android:src="@drawable/jiu3"/>
+                android:src="@drawable/a1"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingTop="2dp"
                 android:paddingLeft="0dp"
                 android:paddingBottom="12dp"
-                android:layout_gravity="center"
                 android:textSize="20dp"
                 android:textColor="#000"
                 android:text="骑行"/>
@@ -262,17 +258,17 @@
                 android:paddingTop="15dp"
                 android:layout_width="52dp"
                 android:layout_height="52dp"
-                android:src="@drawable/jiu9"/>
+                android:src="@drawable/a1"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingTop="2dp"
                 android:paddingLeft="0dp"
                 android:paddingBottom="12dp"
-                android:layout_gravity="center"
+                android:layout_marginLeft="15dp"
                 android:textSize="20dp"
                 android:textColor="#000"
-                android:text="乘车"/>
+                android:text="交通工具"/>
         </LinearLayout>
     </LinearLayout>
 

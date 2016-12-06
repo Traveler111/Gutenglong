@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import com.example.nianchen.normaluniversitytourgroup.page_activity.RegistActivity;
 import com.hyphenate.EMCallBack;
+import com.hyphenate.EMContactListener;
 import com.hyphenate.EMError;
 import com.hyphenate.chat.EMClient;
 import com.loopj.android.http.AsyncHttpClient;
@@ -38,12 +39,15 @@ public class LoginActivity extends AppCompatActivity {
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
             if(loginresult.equals("loginok")){
-                Intent i = new Intent(LoginActivity.this, MainActivity.class);
-                startActivity(i);
-                LoginActivity.this.finish();
+
             }
             else {
                 Toast.makeText(LoginActivity.this, "登入失败",Toast.LENGTH_LONG).show();
+            }
+            if(msg.what==10){
+                Intent i = new Intent(LoginActivity.this, MainActivity.class);
+                startActivity(i);
+                LoginActivity.this.finish();
             }
         }
     };
@@ -74,6 +78,9 @@ public class LoginActivity extends AppCompatActivity {
         public void onClick(View v) {
             switch (v.getId()) {
                 case R.id.btlogin:
+                    mDialog = new ProgressDialog(LoginActivity.this);
+                    mDialog.setMessage("正在登陆，请稍后...");
+                    mDialog.show();
                     login();
                     loginhx();
                    break;
@@ -125,9 +132,6 @@ public class LoginActivity extends AppCompatActivity {
         Log.e("log","onRestart");
     }
     public void login(){
-        mDialog = new ProgressDialog(LoginActivity.this);
-        mDialog.setMessage("正在登陆，请稍后...");
-        mDialog.show();
          name=EtUname.getText().toString();
           password=EtPwd.getText().toString();
         AsyncHttpClient client=new AsyncHttpClient();
@@ -163,7 +167,9 @@ public class LoginActivity extends AppCompatActivity {
                         mDialog.dismiss();
                         // 加载所有会话到内存
                         EMClient.getInstance().chatManager().loadAllConversations();
-
+                        Message msg=new Message();
+                        msg.what=10;
+                        myhandler.sendMessage(msg);
                     }
                 });
             }
@@ -174,6 +180,7 @@ public class LoginActivity extends AppCompatActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
+
                         mDialog.dismiss();
                         Log.d("lzan13", "登录失败 Error code:" + i + ", message:" + s);
                         /**
@@ -231,5 +238,6 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
     }
+
 
 }

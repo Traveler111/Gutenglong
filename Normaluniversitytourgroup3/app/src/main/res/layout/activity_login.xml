@@ -17,12 +17,14 @@
         android:layout_gravity="center"
     android:layout_height="wrap_content">
     <EditText
+        android:textColorHint="#FFFFFF"
         android:layout_width="wrap_content"
         android:textAlignment="center"
         android:id="@+id/Etu"
         android:layout_height="wrap_content"
         android:textSize="28dp"
-        android:hint="请输入用户名"/>
+        android:hint="请输入用户名"
+        android:textColor="#FFFFFF"/>
 </LinearLayout>
     <LinearLayout
         android:layout_marginTop="10dp"
@@ -30,6 +32,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
         <EditText
+            android:textColorHint="#FFFFFF"
             android:inputType="textPassword"
             android:id="@+id/Pw"
             android:layout_width="wrap_content"
@@ -45,6 +48,7 @@
         android:layout_gravity="center"
         android:orientation="horizontal">
         <CheckBox
+            android:textColor="#FFFFFF"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="记住密码"

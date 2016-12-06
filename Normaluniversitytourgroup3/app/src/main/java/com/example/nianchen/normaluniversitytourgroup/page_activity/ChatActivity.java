@@ -8,10 +8,10 @@ import com.example.nianchen.normaluniversitytourgroup.R;
 /**
  * Created by nianchen on 2016/11/23.
  */
-public class GalleryActivity extends Activity{
+public class ChatActivity extends Activity{//友聊
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.jiu_gallery);
+        setContentView(R.layout.jiu_chat);
     }
 }
