@@ -42,4 +42,8 @@ public class ToolsActivity extends Activity{//
     private void getId() {
         list = (ListView) findViewById(R.id.tools);
     }
+    public void onPause(){
+        super.onPause();
+        friends.clear();
+    }
 }

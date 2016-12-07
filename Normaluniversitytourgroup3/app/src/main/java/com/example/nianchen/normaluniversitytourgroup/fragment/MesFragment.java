@@ -90,4 +90,9 @@ public class MesFragment extends Fragment{
             tabHost.addTab(tab001);
         }
     }
+    public void onPause(){
+        super.onPause();
+        friends1.clear();
+        friends2.clear();
+    }
 }

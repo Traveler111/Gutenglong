@@ -1,7 +1,10 @@
 package com.example.nianchen.normaluniversitytourgroup;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.ImageButton;
@@ -12,8 +15,10 @@ import com.example.nianchen.normaluniversitytourgroup.fragment.FindFragment;
 import com.example.nianchen.normaluniversitytourgroup.fragment.HomeFragment;
 import com.example.nianchen.normaluniversitytourgroup.fragment.MesFragment;
 import com.example.nianchen.normaluniversitytourgroup.fragment.MyFragment;
+import com.hyphenate.EMContactListener;
+import com.hyphenate.chat.EMClient;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends Activity {
 
     public static LinearLayout ll;
 
@@ -47,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
         setListener();
         //设置默认页面
         setDefaultPage();
+        setfriendlistener();
     }
 
     private void setListener() {
@@ -141,6 +147,41 @@ public class MainActivity extends AppCompatActivity {
             transaction.commit();
             ll.invalidate();
         }
+    }
+    public void setfriendlistener(){
+        EMClient.getInstance().contactManager().setContactListener(new EMContactListener() {
+            @Override
+            public void onContactAdded(String s) {
+
+            }
+
+            @Override
+            public void onContactDeleted(String s) {
+
+            }
+
+            @Override
+            public void onContactInvited(String s, String s1) {
+                Log.e("receive from "+s,"reason is"+s1);
+                Intent intent=new Intent();
+                //与清单文件的receiver的anction对应
+                intent.setAction("com.broadcast.test");
+                intent.putExtra("name",s);
+                intent.putExtra("reason",s1);
+                //发送广播
+                sendBroadcast(intent);
+            }
+
+            @Override
+            public void onContactAgreed(String s) {
+
+            }
+
+            @Override
+            public void onContactRefused(String s) {
+
+            }
+        });
     }
     private void ResetTabsImg() {
         image_home.setImageResource(R.drawable.home1);

@@ -77,4 +77,8 @@ public class GalleryActivity extends Activity{
         gallery = (ImageView)findViewById(R.id.imag);
         image = (ImageView)findViewById(R.id.mautos);
     }
+    public void onPause(){
+        super.onPause();
+        friends.clear();
+    }
 }

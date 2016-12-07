@@ -39,4 +39,8 @@ public class TravelersActivity extends Activity{
     private void getId() {
         list = (ListView) findViewById(R.id.traveler);
     }
+    public void onPause(){
+        super.onPause();
+        friends.clear();
+    }
 }

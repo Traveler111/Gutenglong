@@ -2,12 +2,12 @@ package com.example.nianchen.normaluniversitytourgroup;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -19,12 +19,9 @@ import com.hyphenate.EMError;
 import com.hyphenate.chat.EMClient;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
-import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
-import com.loopj.android.http.ResponseHandlerInterface;
 
 import org.apache.http.Header;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 public class LoginActivity extends AppCompatActivity {
@@ -38,12 +35,15 @@ public class LoginActivity extends AppCompatActivity {
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
             if(loginresult.equals("loginok")){
-                Intent i = new Intent(LoginActivity.this, MainActivity.class);
-                startActivity(i);
-                LoginActivity.this.finish();
+
             }
             else {
                 Toast.makeText(LoginActivity.this, "登入失败",Toast.LENGTH_LONG).show();
+            }
+            if(msg.what==10){
+                Intent i = new Intent(LoginActivity.this, MainActivity.class);
+                startActivity(i);
+                LoginActivity.this.finish();
             }
         }
     };
@@ -74,9 +74,17 @@ public class LoginActivity extends AppCompatActivity {
         public void onClick(View v) {
             switch (v.getId()) {
                 case R.id.btlogin:
+                    mDialog = new ProgressDialog(LoginActivity.this);
+                    mDialog.setMessage("正在登陆，请稍后...");
+                    mDialog.show();
                     login();
                     loginhx();
-                   break;
+                    SharedPreferences spf=getSharedPreferences("User",MODE_PRIVATE);
+                    SharedPreferences.Editor editor=spf.edit();
+                    editor.putString("uname",EtUname.getText().toString());
+                    editor.clear();
+                    editor.commit();
+                    break;
                 case R.id.regist:
                     Intent ina=new Intent(LoginActivity.this, RegistActivity.class);
                     startActivity(ina);
@@ -125,11 +133,8 @@ public class LoginActivity extends AppCompatActivity {
         Log.e("log","onRestart");
     }
     public void login(){
-        mDialog = new ProgressDialog(LoginActivity.this);
-        mDialog.setMessage("正在登陆，请稍后...");
-        mDialog.show();
-         name=EtUname.getText().toString();
-          password=EtPwd.getText().toString();
+        name=EtUname.getText().toString();
+        password=EtPwd.getText().toString();
         AsyncHttpClient client=new AsyncHttpClient();
         RequestParams params=new RequestParams();
         params.put("username",name);
@@ -163,7 +168,9 @@ public class LoginActivity extends AppCompatActivity {
                         mDialog.dismiss();
                         // 加载所有会话到内存
                         EMClient.getInstance().chatManager().loadAllConversations();
-
+                        Message msg=new Message();
+                        msg.what=10;
+                        myhandler.sendMessage(msg);
                     }
                 });
             }
@@ -174,6 +181,7 @@ public class LoginActivity extends AppCompatActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
+
                         mDialog.dismiss();
                         Log.d("lzan13", "登录失败 Error code:" + i + ", message:" + s);
                         /**
@@ -231,5 +239,6 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
     }
+
 
 }

@@ -44,4 +44,8 @@ public class AttFragment extends Fragment{
         friends.add(new FriendFour(R.drawable.a2,"天宫寺：我省著名旅游景点。。。。"));
         Log.e("getdata","run");
     }
+    public void onPause(){
+        super.onPause();
+        friends.clear();
+    }
 }

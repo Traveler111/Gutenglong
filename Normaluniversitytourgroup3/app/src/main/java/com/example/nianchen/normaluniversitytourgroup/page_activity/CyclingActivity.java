@@ -37,4 +37,8 @@ public class CyclingActivity extends Activity{//友聊
     private void getId() {
         list = (ListView) findViewById(R.id.cyclings);
     }
+    public void onPause(){
+        super.onPause();
+        friends.clear();
+    }
 }

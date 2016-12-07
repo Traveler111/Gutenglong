@@ -37,4 +37,8 @@ public class OppositeActivity extends Activity{//友聊
     private void getId() {
         list = (ListView) findViewById(R.id.opposite_sexss);
     }
+    public void onPause(){
+        super.onPause();
+        friends.clear();
+    }
 }

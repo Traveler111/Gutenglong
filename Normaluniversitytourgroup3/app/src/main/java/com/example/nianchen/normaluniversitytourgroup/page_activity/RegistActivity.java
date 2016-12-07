@@ -3,11 +3,9 @@ package com.example.nianchen.normaluniversitytourgroup.page_activity;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.icu.text.DateFormat;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.support.annotation.UiThread;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -162,6 +160,7 @@ public class RegistActivity extends Activity {
         });
 
     }
+
 
 }
 
