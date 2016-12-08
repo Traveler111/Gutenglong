@@ -1,5 +1,6 @@
 package com.example.nianchen.normaluniversitytourgroup;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -24,7 +25,7 @@ import com.loopj.android.http.RequestParams;
 import org.apache.http.Header;
 import org.json.JSONObject;
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends Activity {
     private Button Btlogin;
     private EditText EtUname;
     private EditText EtPwd;

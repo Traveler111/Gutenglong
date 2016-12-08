@@ -69,7 +69,7 @@
                 android:paddingBottom="12dp"
                 android:textSize="20dp"
                 android:textColor="#000"
-                android:text="驴友会"/>
+                android:text=" 驴友会"/>
         </LinearLayout>
         <LinearLayout
             android:clickable="true"
@@ -156,7 +156,7 @@
                 android:layout_gravity="center"
                 android:textSize="20dp"
                 android:textColor="#000"
-                android:text="友聊"/>
+                android:text=" 友聊"/>
         </LinearLayout>
         <LinearLayout
             android:clickable="true"
@@ -217,7 +217,7 @@
                 android:layout_gravity="center"
                 android:textSize="20dp"
                 android:textColor="#000"
-                android:text="徒步"/>
+                android:text=" 徒步"/>
         </LinearLayout>
         <LinearLayout
             android:clickable="true"
@@ -245,7 +245,7 @@
                 android:layout_gravity="center"
                 android:textSize="20dp"
                 android:textColor="#000"
-                android:text="骑行"/>
+                android:text=" 骑行"/>
         </LinearLayout>
         <LinearLayout
             android:clickable="true"
@@ -263,6 +263,7 @@
                 android:layout_width="52dp"
                 android:layout_height="52dp"
                 android:src="@drawable/jiu9"/>
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -272,7 +273,8 @@
                 android:layout_gravity="center"
                 android:textSize="20dp"
                 android:textColor="#000"
-                android:text="乘车"/>
+                android:text=" 乘车"
+                android:id="@+id/textView2" />
         </LinearLayout>
     </LinearLayout>
 

@@ -7,7 +7,7 @@ android {
         }
     }
     compileSdkVersion 24
-    buildToolsVersion "24.0.2"
+    buildToolsVersion "24.0.1"
 
     defaultConfig {
         applicationId "com.example.nianchen.normaluniversitytourgroup"
