@@ -61,7 +61,7 @@ public class GroupActivity extends Activity {
                         String stitle=json.getString("Title");
                         System.out.println("Title:"+stitle);
                         System.out.println("Content:"+scontent);
-                        friends.add(new FriendTwo(R.drawable.a1,stitle,scontent,R.drawable.b1));
+                        friends.add(new FriendTwo("http://123.207.228.232/blog/downFile",stitle,scontent,R.drawable.b1));
                         myadpter.notifyDataSetChanged();
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -71,7 +71,7 @@ public class GroupActivity extends Activity {
         });
         getid();
         setlistener();
-        myadpter = new GroupAdapter(this,friends);
+        myadpter = new GroupAdapter(this,friends,list);
         list.setAdapter(myadpter);
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -119,24 +119,9 @@ public class GroupActivity extends Activity {
         jia.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 Intent i=new Intent();
                 i.setClass(GroupActivity.this, MainActivityFabu.class);
                 startActivity(i);
-//                View v2= LayoutInflater.from(GroupActivity.this).inflate(R.layout.layout_fabu,null);
-//                new AlertDialog.Builder(GroupActivity.this)
-//                        .setTitle("发布你的队伍信息")
-//                        .setView(v2)
-//                        .setPositiveButton("发布", new DialogInterface.OnClickListener() {
-//                            @Override
-//                            public void onClick(DialogInterface dialog, int which) {
-//
-//                                Toast.makeText(GroupActivity.this, "发布成功", Toast.LENGTH_SHORT).show();
-//                            }
-//                        })
-//                        .setNegativeButton("取消",null)
-//                        .create()
-//                        .show();
             }
         });
     }
@@ -146,16 +131,16 @@ public class GroupActivity extends Activity {
         jia =(ImageView)findViewById(R.id.img_jia);
     }
 
-    private void getdata() {
-        friends.add(new FriendTwo(R.drawable.a1,"抱犊寨","详情......",R.drawable.b1));
-        friends.add(new FriendTwo(R.drawable.a1,"抱犊寨","详情......",R.drawable.b1));
-        friends.add(new FriendTwo(R.drawable.a1,"抱犊寨","详情......",R.drawable.b1));
-        friends.add(new FriendTwo(R.drawable.a1,"抱犊寨","详情......",R.drawable.b1));
-        friends.add(new FriendTwo(R.drawable.a1,"抱犊寨","详情......",R.drawable.b1));
-        friends.add(new FriendTwo(R.drawable.a1,"抱犊寨","详情......",R.drawable.b1));
-        friends.add(new FriendTwo(R.drawable.a1,"抱犊寨","详情......",R.drawable.b1));
-        friends.add(new FriendTwo(R.drawable.a1,"抱犊寨","详情......",R.drawable.b1));
-    }
+//    private void getdata() {
+//        friends.add(new FriendTwo(R.drawable.a1,"抱犊寨","详情......",R.drawable.b1));
+//        friends.add(new FriendTwo(R.drawable.a1,"抱犊寨","详情......",R.drawable.b1));
+//        friends.add(new FriendTwo(R.drawable.a1,"抱犊寨","详情......",R.drawable.b1));
+//        friends.add(new FriendTwo(R.drawable.a1,"抱犊寨","详情......",R.drawable.b1));
+//        friends.add(new FriendTwo(R.drawable.a1,"抱犊寨","详情......",R.drawable.b1));
+//        friends.add(new FriendTwo(R.drawable.a1,"抱犊寨","详情......",R.drawable.b1));
+//        friends.add(new FriendTwo(R.drawable.a1,"抱犊寨","详情......",R.drawable.b1));
+//        friends.add(new FriendTwo(R.drawable.a1,"抱犊寨","详情......",R.drawable.b1));
+//    }
     public void onPause(){
         super.onPause();
         friends.clear();
