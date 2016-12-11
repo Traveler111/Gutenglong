@@ -34,6 +34,5 @@ dependencies {
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:appcompat-v7:24.2.1'
     compile files('libs/android-async-http-1.4.8.jar')
-    compile files('libs/hyphenatechat_3.2.1.jar')
-    compile files('libs/BaiduLBS_Android.jar')
+    compile project(':easeUI_CN')
 }

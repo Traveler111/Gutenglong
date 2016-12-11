@@ -41,7 +41,7 @@ public class LoginActivity extends Activity {
             else {
                 Toast.makeText(LoginActivity.this, "登入失败",Toast.LENGTH_LONG).show();
             }
-            if(msg.what==10){
+            if(msg.what==10&&loginresult.equals("loginok")){
                 Intent i = new Intent(LoginActivity.this, MainActivity.class);
                 startActivity(i);
                 LoginActivity.this.finish();

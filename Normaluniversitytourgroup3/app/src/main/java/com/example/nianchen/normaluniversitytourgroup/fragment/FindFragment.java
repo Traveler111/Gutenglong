@@ -110,7 +110,7 @@ public class FindFragment extends Fragment {
 //                new String[]{"name1","hearder1","desc1"},
 //                new int[]{R.id.name1 ,R.id.hearder1, R.id.desc1});
 //        list.setAdapter(simpleAdapter);
-//        getdata();
+        getdata();
         findview();
         getfriendlist();
         searchfriend();

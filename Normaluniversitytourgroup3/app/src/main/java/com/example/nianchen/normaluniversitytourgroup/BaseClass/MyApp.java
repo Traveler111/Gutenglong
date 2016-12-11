@@ -6,6 +6,8 @@ import android.content.Context;
 
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.chat.EMOptions;
+import com.hyphenate.easeui.controller.EaseUI;
+import com.hyphenate.easeui.domain.EaseUser;
 
 import java.util.Iterator;
 import java.util.List;
@@ -81,13 +83,28 @@ public class MyApp extends Application {
         // options.setMipushConfig(MLConstants.ML_MI_APP_ID, MLConstants.ML_MI_APP_KEY);
 
         // 调用初始化方法初始化sdk
-        EMClient.getInstance().init(mContext, options);
+        EaseUI.getInstance().init(this,options);
 
         // 设置开启debug模式
         EMClient.getInstance().setDebugMode(true);
 
+//需要EaseUI库显示用户头像和昵称设置此provider
+        EaseUI.getInstance().setUserProfileProvider(new EaseUI.EaseUserProfileProvider() {
+
+            @Override
+            public EaseUser getUser(String username) {
+                return getUserInfo(username);
+            }
+        });
+
         // 设置初始化已经完成
         isInit = true;
+    }
+
+    private EaseUser getUserInfo(String username) {
+        EaseUser user=new EaseUser(username);
+        user.setNickname(username);
+        return user;
     }
 
     /**
@@ -117,4 +134,5 @@ public class MyApp extends Application {
         // 没有匹配的项，返回为null
         return null;
     }
+
 }

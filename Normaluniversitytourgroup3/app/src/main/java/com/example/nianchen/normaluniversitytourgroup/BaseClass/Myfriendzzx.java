@@ -6,6 +6,7 @@ package com.example.nianchen.normaluniversitytourgroup.BaseClass;
 public class Myfriendzzx {
     private String name;
     private int img;
+    private String id;
 
     public String getName() {
         return name;
@@ -24,7 +25,6 @@ public class Myfriendzzx {
     }
 
     public Myfriendzzx(String name, int img) {
-
         this.name = name;
         this.img = img;
     }

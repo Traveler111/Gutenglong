@@ -9,21 +9,23 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.nianchen.normaluniversitytourgroup.BaseClass.FriendOne;
+import com.example.nianchen.normaluniversitytourgroup.BaseClass.Myfriendzzx;
 import com.example.nianchen.normaluniversitytourgroup.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by nianchen on 2016/11/24.
  */
 public class MesFragmentContactAdapter extends BaseAdapter {
-    private List<FriendOne>friends1;
+    private ArrayList<Myfriendzzx> friends1=new ArrayList<>();
     private Context c;
     private ImageView img;
     private TextView name;
     private TextView desc;
 
-    public MesFragmentContactAdapter(Context c , List<FriendOne> friends1) {
+    public MesFragmentContactAdapter(ArrayList<Myfriendzzx> friends1, Context c) {
         this.friends1 = friends1;
         this.c = c;
     }
@@ -52,8 +54,7 @@ public class MesFragmentContactAdapter extends BaseAdapter {
         img.setImageResource(friends1.get(position).getImg());
         name = (TextView) convertView.findViewById(R.id.name1);
         name.setText(friends1.get(position).getName().toString());
-        desc = (TextView) convertView.findViewById(R.id.desc1);
-        desc.setText(friends1.get(position).getMisoshu().toString());
+
         return convertView;
     }
 }

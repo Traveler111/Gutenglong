@@ -2,6 +2,7 @@ package com.example.nianchen.normaluniversitytourgroup;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
@@ -10,9 +11,12 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.AdapterView;
@@ -20,11 +24,15 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.nianchen.normaluniversitytourgroup.page_activity.GroupActivity;
+import com.hyphenate.chat.EMClient;
+import com.hyphenate.chat.EMGroupManager;
+import com.hyphenate.exceptions.HyphenateException;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
@@ -33,6 +41,7 @@ import org.apache.http.Header;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+;
 
 public class MainActivityFabu extends Activity {
 
@@ -40,13 +49,32 @@ public class MainActivityFabu extends Activity {
     private Button buttonPublish;                //发布按钮
     private final int IMAGE_OPEN = 1;        //打开图片标记
     private String pathImage;                       //选择图片路径
-    private Bitmap bmp;                               //导入临时图片
+    private Bitmap bmp;
+    private String result="1";               //导入临时图片
     private ArrayList<HashMap<String, Object>> imageItem;
     private SimpleAdapter simpleAdapter;     //适配器
     private TextView tv1;
     private TextView tv3;
     private EditText title;
     private EditText content;
+    private Handler myhandler=new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            Log.e("what is  ",""+msg.what);
+            Log.e("reslut is",""+result);
+            if(result.equals("ok")&&msg.what==10){
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(MainActivityFabu.this,"发布成功！",Toast.LENGTH_LONG).show();
+                    }
+                });
+            }
+        }
+    };
+
+    private ProgressDialog dia;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,6 +108,7 @@ public class MainActivityFabu extends Activity {
         tv3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Log.e("tv3","onclick");
                 String url="http://123.207.228.232/blog/Fabucontent";
                 AsyncHttpClient client=new AsyncHttpClient();
                 RequestParams rp=new RequestParams();
@@ -88,9 +117,11 @@ public class MainActivityFabu extends Activity {
                 client.get(url, rp, new AsyncHttpResponseHandler() {
                     @Override
                     public void onSuccess(int i, Header[] headers, byte[] bytes) {
-                        Intent i1=new Intent();
-                        i1.setClass(MainActivityFabu.this, GroupActivity.class);
-                        startActivity(i1);
+                        //Intent i1=new Intent();
+                        //i1.setClass(MainActivityFabu.this, GroupActivity.class);
+                        //startActivity(i1);
+
+                        result="ok";
                         Toast.makeText(MainActivityFabu.this, "发布成功", Toast.LENGTH_SHORT).show();
                     }
 
@@ -99,6 +130,7 @@ public class MainActivityFabu extends Activity {
 
                     }
                 });
+                creategroup(title.getText().toString().trim(),content.getText().toString().trim(),"大家一起出去玩");
             }
         });
         /*
@@ -247,5 +279,20 @@ public class MainActivityFabu extends Activity {
             }
         });
         builder.create().show();
+    }
+    public void creategroup(String groupName,String desc,String reason){
+        EMGroupManager.EMGroupOptions option = new EMGroupManager.EMGroupOptions();
+        option.maxUsers = 200;
+        option.style = EMGroupManager.EMGroupStyle.EMGroupStylePublicOpenJoin;
+
+        try {
+            EMClient.getInstance().groupManager().createGroup(groupName, desc,new String[]{} ,reason, option);
+            Message msg=new Message();
+            msg.what=10;
+            myhandler.sendMessage(msg);
+        } catch (HyphenateException e) {
+            e.printStackTrace();
+        }
+
     }
 }
