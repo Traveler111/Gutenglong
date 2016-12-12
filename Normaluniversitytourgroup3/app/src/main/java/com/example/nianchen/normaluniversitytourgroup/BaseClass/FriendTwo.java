@@ -4,16 +4,16 @@ package com.example.nianchen.normaluniversitytourgroup.BaseClass;
  * Created by nianchen on 2016/11/24.
  */
 public class FriendTwo {
-    private int left;
+    private String left;
     private String top;
     private String bottom;
     private int right;
 
-    public int getLeft() {
+    public String getLeft() {
         return left;
     }
 
-    public void setLeft(int left) {
+    public void setLeft(String left) {
         this.left = left;
     }
 
@@ -41,7 +41,7 @@ public class FriendTwo {
         this.right = right;
     }
 
-    public FriendTwo(int left, String top, String bottom, int right) {
+    public FriendTwo(String left, String top, String bottom, int right) {
         this.left = left;
         this.top = top;
         this.bottom = bottom;
