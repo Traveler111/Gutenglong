@@ -27,7 +27,7 @@ public class MyteamActivity extends AppCompatActivity {
 
 
     private ListView lv;
-    private List<EMGroupInfo> groupsList=new ArrayList<>();
+    private List<EMGroup> groupsList=new ArrayList<>();
     private int pageSize=20;
     private ArrayList<Group>mygroup=new ArrayList<>();
     private Groupmyadapter myadapter;
@@ -38,6 +38,8 @@ public class MyteamActivity extends AppCompatActivity {
             for(int i=0;i<groupsList.size();i++){
                 Group group=new Group(groupsList.get(i).getGroupName(),groupsList.get(i).getGroupId()
                 ,R.drawable.loginh);
+
+
                 mygroup.add(group);
             }
             myadapter=new Groupmyadapter(MyteamActivity.this,mygroup);
@@ -70,8 +72,9 @@ public class MyteamActivity extends AppCompatActivity {
                  super.run();
                  EMCursorResult<EMGroupInfo> result = null;//需异步处理
                  try {
-                     result = EMClient.getInstance().groupManager().getPublicGroupsFromServer(pageSize, "1");
-                     List<EMGroupInfo> returnGroups = result.getData();
+                     //result = EMClient.getInstance().groupManager().getPublicGroupsFromServer(pageSize, "1");
+                    // List<EMGroupInfo> returnGroups = result.getData();
+                     List<EMGroup> returnGroups = EMClient.getInstance().groupManager().getJoinedGroupsFromServer();
                      groupsList =returnGroups;
                      Message msg=new Message();
                      myhandler.sendMessage(msg);
