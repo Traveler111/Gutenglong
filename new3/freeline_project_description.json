@@ -1,0 +1,137 @@
+{
+    "android_gradle_plugin_version": "2.2.2",
+    "apk_path": "C:\\Users\\Lenov\\Desktop\\GitHub for windows\\traveler_ljh\\new3\\app\\build\\outputs\\apk\\app-debug.apk",
+    "apt": {
+        
+    },
+    "apt_libraries": {
+        "dagger": false,
+        "butterknife": false
+    },
+    "auto_dependency": true,
+    "build_cache_dir": "C:\\Users\\Lenov\\Desktop\\GitHub for windows\\traveler_ljh\\new3\\app\\build\\freeline",
+    "build_directory": "C:\\Users\\Lenov\\Desktop\\GitHub for windows\\traveler_ljh\\new3\\app\\build",
+    "build_script": "gradlew.bat :app:assembleDebug",
+    "build_script_work_directory": "",
+    "build_tools_directory": "D:\\android-sdk-windows\\build-tools\\24.0.1",
+    "build_tools_version": "24.0.1",
+    "compile_sdk_directory": "D:\\android-sdk-windows\\platforms\\android-24",
+    "compile_sdk_version": "android-24",
+    "databinding": [
+        
+    ],
+    "databinding_compiler_jar": "",
+    "databinding_modules": [
+        
+    ],
+    "debug_package": "com.example.nianchen.normaluniversitytourgroup",
+    "exclude_dep_res_paths": [
+        
+    ],
+    "extra_dep_res_paths": [
+        
+    ],
+    "freeline_cache_dir": "C:\\Users\\Lenov\\Desktop\\GitHub for windows\\traveler_ljh\\new3",
+    "freeline_gradle_plugin_version": "0.8.4",
+    "java_home": "C:\\Program Files\\Java\\jdk1.8.0_102",
+    "launcher": "com.example.nianchen.normaluniversitytourgroup.LoginActivity",
+    "main_assets_directory": [
+        "C:\\Users\\Lenov\\Desktop\\GitHub for windows\\traveler_ljh\\new3\\app\\src\\debug\\assets",
+        "C:\\Users\\Lenov\\Desktop\\GitHub for windows\\traveler_ljh\\new3\\app\\src\\main\\assets"
+    ],
+    "main_jniLibs_directory": [
+        "C:\\Users\\Lenov\\Desktop\\GitHub for windows\\traveler_ljh\\new3\\app\\src\\debug\\jniLibs",
+        "C:\\Users\\Lenov\\Desktop\\GitHub for windows\\traveler_ljh\\new3\\app\\libs"
+    ],
+    "main_jni_directory": [
+        "C:\\Users\\Lenov\\Desktop\\GitHub for windows\\traveler_ljh\\new3\\app\\src\\debug\\jni",
+        "C:\\Users\\Lenov\\Desktop\\GitHub for windows\\traveler_ljh\\new3\\app\\src\\main\\jni"
+    ],
+    "main_manifest_path": "C:\\Users\\Lenov\\Desktop\\GitHub for windows\\traveler_ljh\\new3\\app\\src\\main\\AndroidManifest.xml",
+    "main_project_dir": "app",
+    "main_project_name": "app",
+    "main_r_path": "C:\\Users\\Lenov\\Desktop\\GitHub for windows\\traveler_ljh\\new3\\app\\build\\generated\\source\\r\\debug\\R.java",
+    "main_res_directory": [
+        "C:\\Users\\Lenov\\Desktop\\GitHub for windows\\traveler_ljh\\new3\\app\\src\\debug\\res",
+        "C:\\Users\\Lenov\\Desktop\\GitHub for windows\\traveler_ljh\\new3\\app\\src\\main\\res"
+    ],
+    "main_src_directory": [
+        "C:\\Users\\Lenov\\Desktop\\GitHub for windows\\traveler_ljh\\new3\\app\\src\\debug\\java",
+        "C:\\Users\\Lenov\\Desktop\\GitHub for windows\\traveler_ljh\\new3\\app\\src\\main\\java"
+    ],
+    "module_dependencies": {
+        "app": [
+            "easeUI_CN"
+        ],
+        "easeUI_CN": [
+            
+        ]
+    },
+    "modules": [
+        {
+            "name": "app",
+            "path": "C:\\Users\\Lenov\\Desktop\\GitHub for windows\\traveler_ljh\\new3\\app"
+        },
+        {
+            "name": "easeUI_CN",
+            "path": "C:\\Users\\Lenov\\Desktop\\GitHub for windows\\traveler_ljh\\new3\\easeUI_CN"
+        }
+    ],
+    "package": "com.example.nianchen.normaluniversitytourgroup",
+    "product_flavor": "",
+    "project_source_sets": {
+        "app": {
+            "main_assets_directory": [
+                "C:\\Users\\Lenov\\Desktop\\GitHub for windows\\traveler_ljh\\new3\\app\\src\\debug\\assets",
+                "C:\\Users\\Lenov\\Desktop\\GitHub for windows\\traveler_ljh\\new3\\app\\src\\main\\assets"
+            ],
+            "main_jniLibs_directory": [
+                "C:\\Users\\Lenov\\Desktop\\GitHub for windows\\traveler_ljh\\new3\\app\\src\\debug\\jniLibs",
+                "C:\\Users\\Lenov\\Desktop\\GitHub for windows\\traveler_ljh\\new3\\app\\libs"
+            ],
+            "main_jni_directory": [
+                "C:\\Users\\Lenov\\Desktop\\GitHub for windows\\traveler_ljh\\new3\\app\\src\\debug\\jni",
+                "C:\\Users\\Lenov\\Desktop\\GitHub for windows\\traveler_ljh\\new3\\app\\src\\main\\jni"
+            ],
+            "main_manifest_path": "C:\\Users\\Lenov\\Desktop\\GitHub for windows\\traveler_ljh\\new3\\app\\src\\main\\AndroidManifest.xml",
+            "main_res_directory": [
+                "C:\\Users\\Lenov\\Desktop\\GitHub for windows\\traveler_ljh\\new3\\app\\src\\debug\\res",
+                "C:\\Users\\Lenov\\Desktop\\GitHub for windows\\traveler_ljh\\new3\\app\\src\\main\\res"
+            ],
+            "main_src_directory": [
+                "C:\\Users\\Lenov\\Desktop\\GitHub for windows\\traveler_ljh\\new3\\app\\src\\debug\\java",
+                "C:\\Users\\Lenov\\Desktop\\GitHub for windows\\traveler_ljh\\new3\\app\\src\\main\\java"
+            ]
+        },
+        "easeUI_CN": {
+            "main_assets_directory": [
+                "C:\\Users\\Lenov\\Desktop\\GitHub for windows\\traveler_ljh\\new3\\easeUI_CN\\src\\release\\assets",
+                "C:\\Users\\Lenov\\Desktop\\GitHub for windows\\traveler_ljh\\new3\\easeUI_CN\\src\\main\\assets"
+            ],
+            "main_jniLibs_directory": [
+                "C:\\Users\\Lenov\\Desktop\\GitHub for windows\\traveler_ljh\\new3\\easeUI_CN\\src\\release\\jniLibs",
+                "C:\\Users\\Lenov\\Desktop\\GitHub for windows\\traveler_ljh\\new3\\easeUI_CN\\src\\main\\jniLibs"
+            ],
+            "main_jni_directory": [
+                "C:\\Users\\Lenov\\Desktop\\GitHub for windows\\traveler_ljh\\new3\\easeUI_CN\\src\\release\\jni",
+                "C:\\Users\\Lenov\\Desktop\\GitHub for windows\\traveler_ljh\\new3\\easeUI_CN\\src\\main\\jni"
+            ],
+            "main_manifest_path": "C:\\Users\\Lenov\\Desktop\\GitHub for windows\\traveler_ljh\\new3\\easeUI_CN\\src\\main\\AndroidManifest.xml",
+            "main_res_directory": [
+                "C:\\Users\\Lenov\\Desktop\\GitHub for windows\\traveler_ljh\\new3\\easeUI_CN\\src\\release\\res",
+                "C:\\Users\\Lenov\\Desktop\\GitHub for windows\\traveler_ljh\\new3\\easeUI_CN\\src\\main\\res"
+            ],
+            "main_src_directory": [
+                "C:\\Users\\Lenov\\Desktop\\GitHub for windows\\traveler_ljh\\new3\\easeUI_CN\\src\\release\\java",
+                "C:\\Users\\Lenov\\Desktop\\GitHub for windows\\traveler_ljh\\new3\\easeUI_CN\\src\\main\\java"
+            ]
+        }
+    },
+    "project_type": "gradle",
+    "retrolambda": {
+        
+    },
+    "root_dir": "C:\\Users\\Lenov\\Desktop\\GitHub for windows\\traveler_ljh\\new3",
+    "sdk_directory": "D:\\android-sdk-windows",
+    "use_jdk8": true
+}

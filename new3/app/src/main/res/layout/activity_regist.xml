@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#fff">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="25dp"
+        android:background="#009959"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:orientation="vertical"
+        android:background="#009959"
+        android:gravity="center"
+        >
+
+        <TextView
+            android:gravity="center"
+            android:textSize="24sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#fff"
+            android:text="注册"
+
+            />
+
+
+    </LinearLayout>
+
+    <EditText
+        android:gravity="center"
+        android:layout_marginTop="50dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/username"
+        android:textColorHint="@color/colorAbe"
+        android:hint="请输入用户名"/>
+
+    <EditText
+        android:inputType="textPassword"
+        android:gravity="center"
+        android:textColorHint="@color/colorAbe"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/password"
+        android:hint="请输入密码"/>
+    <EditText
+        android:inputType="textPassword"
+        android:gravity="center"
+        android:textColorHint="@color/colorAbe"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="请再次输入密码"/>
+    <Button
+
+
+        android:textSize="15sp"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:id="@+id/regist"
+        android:background="@drawable/shape_ljh"
+        android:textColor="#547387"
+        android:text="注册"/>
+</LinearLayout>
