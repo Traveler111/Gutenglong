@@ -32,6 +32,7 @@
 			android:layout_centerHorizontal="true"
 			android:gravity="center"
 			/>
+
 		<TextView
 			android:id="@+id/tv3"
 			android:layout_width="wrap_content"
@@ -88,7 +89,16 @@
 				android:textSize="20sp"
 				android:background="@color/colorAbc"
 				/>
-
+			<EditText
+				android:id="@+id/max"
+				android:layout_width="match_parent"
+				android:layout_height="45dp"
+				android:hint="最大容量"
+				android:layout_marginLeft="5dp"
+				android:layout_marginRight="5dp"
+				android:textSize="20sp"
+				android:background="@color/colorAbc"
+				/>
 			<EditText
 				android:id="@+id/content"
 				android:background="@drawable/shape_ljh"

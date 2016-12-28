@@ -20,6 +20,7 @@
         android:gravity="center"
         android:textColor="#fff"/>
    <ListView
+       android:layout_marginTop="20dp"
        android:layout_width="match_parent"
        android:layout_height="wrap_content"
        android:id="@+id/lv">

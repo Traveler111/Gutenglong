@@ -8,11 +8,14 @@ import android.view.WindowManager;
 import android.widget.ListView;
 
 import com.example.nianchen.normaluniversitytourgroup.BaseClass.FriendThree;
+import com.example.nianchen.normaluniversitytourgroup.BaseClass.Group;
+import com.example.nianchen.normaluniversitytourgroup.MyteamActivity;
 import com.example.nianchen.normaluniversitytourgroup.R;
 import com.example.nianchen.normaluniversitytourgroup.adapter.FriendsAdapter;
 import com.hyphenate.chat.EMConversation;
 import com.hyphenate.easeui.EaseConstant;
 import com.hyphenate.easeui.ui.EaseConversationListFragment;
+import com.hyphenate.easeui.widget.EaseConversationList;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -56,7 +59,14 @@ public class OppositeActivity extends AppCompatActivity{//友聊
 
             @Override
             public void onListItemClicked(EMConversation conversation) {
+                if(conversation.getType()== EMConversation.EMConversationType.Chat)
                 startActivity(new Intent(OppositeActivity.this, ChatActivity.class).putExtra(EaseConstant.EXTRA_USER_ID, conversation.getUserName()));
+                else {
+                    Intent ina = new Intent(OppositeActivity.this, MyGroup.class);
+                    ina.putExtra(EaseConstant.EXTRA_CHAT_TYPE, EaseConstant.CHATTYPE_GROUP);
+                    ina.putExtra(EaseConstant.EXTRA_USER_ID, conversation.getUserName());
+                    startActivity(ina);
+                }
             }
         });
         getSupportFragmentManager().beginTransaction().add(R.id.container,conversationListFragment).commit();

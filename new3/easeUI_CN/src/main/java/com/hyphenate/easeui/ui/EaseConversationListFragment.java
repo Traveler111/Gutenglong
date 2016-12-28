@@ -6,7 +6,9 @@ import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Pair;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -19,6 +21,8 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
+import android.widget.ListView;
+import android.widget.Toast;
 
 import com.hyphenate.EMConnectionListener;
 import com.hyphenate.EMConversationListener;
@@ -26,6 +30,10 @@ import com.hyphenate.EMError;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.chat.EMConversation;
 import com.hyphenate.easeui.R;
+
+import com.hyphenate.easeui.domain.SwipeBean;
+import com.hyphenate.easeui.utils.CommonAdapter;
+import com.hyphenate.easeui.utils.ViewHolder;
 import com.hyphenate.easeui.widget.EaseConversationList;
 
 import java.util.ArrayList;
@@ -46,7 +54,9 @@ public class EaseConversationListFragment extends EaseBaseFragment{
     protected List<EMConversation> conversationList = new ArrayList<EMConversation>();
     protected EaseConversationList conversationListView;
     protected FrameLayout errorItemContainer;
-
+    private static final String TAG = "zxt";
+    private ListView mLv;
+    private List<SwipeBean> mDatas;
     protected boolean isConflict;
     
     protected EMConversationListener convListener = new EMConversationListener(){
@@ -60,6 +70,7 @@ public class EaseConversationListFragment extends EaseBaseFragment{
     
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
         return inflater.inflate(R.layout.ease_fragment_conversation_list, container, false);
     }
 
@@ -94,8 +105,14 @@ public class EaseConversationListFragment extends EaseBaseFragment{
                     listItemClickListener.onListItemClicked(conversation);
                 }
             });
+            conversationListView.setOnCreateContextMenuListener(new View.OnCreateContextMenuListener() {
+                @Override
+                public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+                    menu.add(menu.NONE,0,0,"移除");
+                }
+            });
         }
-        
+
         EMClient.getInstance().addConnectionListener(connectionListener);
         
         query.addTextChangedListener(new TextWatcher() {
@@ -131,8 +148,25 @@ public class EaseConversationListFragment extends EaseBaseFragment{
             }
         });
     }
-    
-    
+
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+        AdapterView.AdapterContextMenuInfo menuInfo;
+        menuInfo =(AdapterView.AdapterContextMenuInfo)item.getMenuInfo();
+        switch (item.getItemId()){
+            case 0:
+//                EMClient.getInstance().chatManager().deleteConversation(conversationList.get(menuInfo.position),true);
+               conversationList.get(menuInfo.position).clearAllMessages();
+                conversationListView.refresh();
+                onResume();
+                //点击第一个菜单项要做的事，如获取点击listview的位置
+//                Toast.makeText(getActivity(), String.valueOf(menuInfo.position), Toast.LENGTH_LONG).show();
+                break;
+
+        }
+        return super.onContextItemSelected(item);
+    }
+
     protected EMConnectionListener connectionListener = new EMConnectionListener() {
         
         @Override

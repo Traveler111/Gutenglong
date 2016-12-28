@@ -3,6 +3,8 @@ package com.example.nianchen.normaluniversitytourgroup.fragment;
 import android.app.Fragment;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -23,6 +25,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.nianchen.normaluniversitytourgroup.BaseClass.FriendOne;
+import com.example.nianchen.normaluniversitytourgroup.BaseClass.Friendlistadapter;
 import com.example.nianchen.normaluniversitytourgroup.BaseClass.Myfriendzzx;
 import com.example.nianchen.normaluniversitytourgroup.MainActivity;
 import com.example.nianchen.normaluniversitytourgroup.R;
@@ -47,8 +50,7 @@ import java.util.List;
  * Created by nianchen on 2016/11/22.
  */
 public class MesFragment extends Fragment {
-    private List<FriendOne> friends1 = new ArrayList<FriendOne>();
-    private List<FriendOne> friends2 = new ArrayList<FriendOne>();
+    private ArrayList <Friendlistadapter> friendlistadapters=new ArrayList<>();
     private View view;
     private SearchView search;
     private LinearLayout chat;
@@ -57,32 +59,51 @@ public class MesFragment extends Fragment {
     private ListView lv;
     private MesFragmentMesAdapter myadapter;
     private ListView list12;
+    private ArrayList <String >myfriends=new ArrayList<>();
     private MesFragmentContactAdapter myadapter1;
     private ArrayList<Myfriendzzx> friends = new ArrayList<>();
     private ArrayList<Myfriendzzx> friends12;
+    private Handler showfriendlsit=new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            if(msg.what==1){
+                Toast.makeText(getActivity(),"你的网络太慢了。。",Toast.LENGTH_LONG).show();
+                return;
+            }
+            Friendlistadapter friendlistadapter= (Friendlistadapter) msg.obj;
+            friendlistadapters.add(friendlistadapter);
+            myadapter1.notifyDataSetChanged();
+        }
+    };
     private Handler getfriendhandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
-            friends12 = new ArrayList<>();
             List<String> lists = (List<String>) msg.obj;
+            myfriends.clear();
+
+            for(int i=0;i<lists.size();i++){
+                Log.e("my friend",lists.get(i));
+            }
             for (int i = 0; i < lists.size()-1; i++) {
                 if(lists.get(i).equals(lists.get(i+1))){
 
                 }
                 else if(i+1!=lists.size()-1&&lists.get(i)!=(lists.get(i+1))){
-                    friends12.add(new Myfriendzzx(lists.get(i), R.drawable.loginhead));
+                    myfriends.add(lists.get(i));
                     Log.e("" + lists.get(i), "get");
                 }
                 else {
-                    friends12.add(new Myfriendzzx(lists.get(i), R.drawable.loginhead));
-                    friends12.add(new Myfriendzzx(lists.get(i+1), R.drawable.loginhead));
+                    myfriends.add(lists.get(i));
+                    myfriends.add(lists.get(i+1));
                 }
 
             }
-            friends.clear();
-            friends.addAll(friends12);
-            myadapter1.notifyDataSetChanged();
+             ArrayList <String >lists1=new ArrayList<>();
+             lists1.addAll(myfriends);
+             getfriendmes(lists1);
+             Log.e("myfriend size",lists1.size()+"");
         }
     };
     private Handler myhandler=new Handler(){
@@ -125,10 +146,10 @@ public class MesFragment extends Fragment {
         getViews();
         //  getdata1();
         // getdata2();
-        getfriendlist();
+       // getfriendlist();
         searchfriend();
         //  myadapter = new MesFragmentMesAdapter(getActivity(),friends1);
-        myadapter1 = new MesFragmentContactAdapter(friends,getActivity());
+        myadapter1 = new MesFragmentContactAdapter(friendlistadapters,getActivity());
        // list11.setAdapter(myadapter);
         list12.setAdapter(myadapter1);
         list12.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -136,7 +157,7 @@ public class MesFragment extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent ina=new Intent(getActivity(), ChatActivity.class);
                 ina.putExtra(EaseConstant.EXTRA_CHAT_TYPE, EaseConstant.CHATTYPE_SINGLE);
-                ina.putExtra(EaseConstant.EXTRA_USER_ID,friends.get(position).getName().toString().trim());
+                ina.putExtra(EaseConstant.EXTRA_USER_ID,friendlistadapters.get(position).getUsername().toString().trim());
                 startActivity(ina);
             }
         });
@@ -172,7 +193,6 @@ public class MesFragment extends Fragment {
     public void onPause() {
        // friends12.clear();
         Log.e("pause","run");
-        getfriendlist();
         super.onPause();
     }
     public void getfriendlist() {
@@ -187,6 +207,9 @@ public class MesFragment extends Fragment {
                     getfriendhandler.sendMessage(msg);
                     Log.e("getfriendlist", "run");
                 } catch (HyphenateException e) {
+                    Message msg = new Message();
+                    msg.what=1;
+                    getfriendhandler.sendMessage(msg);
                     e.printStackTrace();
                 }
             }
@@ -232,9 +255,44 @@ public class MesFragment extends Fragment {
     }
     @Override
     public void onResume() {
+        friendlistadapters.clear();
+        myadapter1.notifyDataSetChanged();
         getfriendlist();
         Log.e("resume","run");
         super.onResume();
     }
+    public void getfriendmes(final ArrayList <String> friends1){
+        String str="http://123.207.228.232/blog/downFile2";
+        for(int i=0;i<friends1.size();i++) {
+            AsyncHttpClient client =new AsyncHttpClient();
+            RequestParams params = new RequestParams();
+            params.put("username", friends1.get(i));
+            final String username=friends1.get(i);
+            Log.e("ss",username);
+            client.get(str, params, new AsyncHttpResponseHandler() {
+                @Override
+                public void onSuccess(int i, Header[] headers, byte[] bytes) {
+                    BitmapFactory bitmapFactory = new BitmapFactory();
+                    //工厂对象的decodeByteArray把字节转换成Bitmap对象
+                    Bitmap bitmap = bitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+                 //  Log.e("ss",""+i);
+                    Message msg=new Message();
+                    msg.obj=new Friendlistadapter(username,bitmap);
+                    showfriendlsit.sendMessage(msg);
+                }
 
+                @Override
+                public void onFailure(int i, Header[] headers, byte[] bytes, Throwable throwable) {
+                    Log.e("failed code",i+"");
+                    BitmapFactory bitmapFactory = new BitmapFactory();
+                    //工厂对象的decodeByteArray把字节转换成Bitmap对象
+                    Bitmap bitmap = bitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+                    Message msg=new Message();
+                    msg.obj=new Friendlistadapter(username,bitmap);
+                    showfriendlsit.sendMessage(msg);
+                }
+            });
+
+        }
+        }
 }

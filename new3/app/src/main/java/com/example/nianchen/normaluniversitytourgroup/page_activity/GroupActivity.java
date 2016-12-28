@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.AbsListView;
@@ -48,6 +49,7 @@ public class GroupActivity extends Activity {
     private ListView list;
     private GroupAdapter myadpter;
     private ImageView jia;
+    private ImageView imagshow;
     private TextView tv1;
     private TextView tv2;
     String s1;
@@ -130,8 +132,10 @@ public class GroupActivity extends Activity {
                 View v1=getLayoutInflater().inflate(R.layout.layout_item,null);
                 tv1=(TextView)v1.findViewById(R.id.tv1);
                 tv2=(TextView)v1.findViewById(R.id.tv2);
+                imagshow = (ImageView)v1.findViewById(R.id.imageshow);
                 tv1.setText(friends.get(position).getTop());
                 tv2.setText(friends.get(position).getBottom());
+                imagshow.setImageResource(R.drawable.logo);
                 s1=friends.get(position).getTop();
                 AlertDialog.Builder adb=new AlertDialog.Builder(GroupActivity.this);
                 adb.setView(v1);
@@ -230,11 +234,15 @@ public class GroupActivity extends Activity {
                     johnreslut="ok";
                     Message msg=new Message();
                     myhandler.sendMessage(msg);
+                    Log.e("john","try");
                 } catch (HyphenateException e) {
                     e.printStackTrace();
+                    mDialog.dismiss();
+                    Toast.makeText(GroupActivity.this,"已加入",Toast.LENGTH_LONG).show();
                 }
             }
         };
-        th.start();
+           th.start();
+
     }
 }

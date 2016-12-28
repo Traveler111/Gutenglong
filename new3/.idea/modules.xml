@@ -5,6 +5,7 @@
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/easeUI_CN/easeUI_CN.iml" filepath="$PROJECT_DIR$/easeUI_CN/easeUI_CN.iml" />
       <module fileurl="file://$PROJECT_DIR$/new3.iml" filepath="$PROJECT_DIR$/new3.iml" />
+      <module fileurl="file://$PROJECT_DIR$/swipemenulib/swipemenulib.iml" filepath="$PROJECT_DIR$/swipemenulib/swipemenulib.iml" />
     </modules>
   </component>
 </project>

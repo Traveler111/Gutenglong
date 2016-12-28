@@ -6,6 +6,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 import android.os.Handler;
 import android.os.Message;
+import android.support.annotation.DrawableRes;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +15,7 @@ import android.widget.AbsListView;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -35,6 +37,8 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
 
+import static com.example.nianchen.normaluniversitytourgroup.R.drawable.shape_green;
+
 /**
  * Created by nianchen on 2016/11/24.
  */
@@ -49,6 +53,9 @@ public class GroupAdapter extends BaseAdapter {
     private String imgurl;
     private String mid;
     private ListView view1;
+    private LinearLayout ll;
+    private String max;
+    
     public int scrollStates;
     private Bitmap bp;
 //    Handler h=new Handler(){
@@ -108,8 +115,7 @@ public class GroupAdapter extends BaseAdapter {
         name=(TextView) convertView.findViewById(R.id.top);
         desc=(TextView)convertView.findViewById(R.id.bottom);
         imgs=(ImageView) convertView.findViewById(R.id.right);
-
-
+        convertView.setBackgroundResource(R.drawable.shape_green);
         name.setText(friends.get(position).getTop().toString());
         desc.setText(friends.get(position).getBottom().toString());
         imgs.setImageResource(friends.get(position).getRight());
@@ -117,7 +123,7 @@ public class GroupAdapter extends BaseAdapter {
         img.setImageResource(R.mipmap.logo);
         imgurl = friends.get(position).getLeft();
         getimg(imgurl, position, friends.get(position).getMid(), convertView,friends.get(position).getPush());
-
+//        ll.setBackgroundResource(R.drawable.shape_green);
         return convertView;
     }
 

@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:layout_centerInParent="false"
     tools:context="com.example.nianchen.normaluniversitytourgroup.MainActivity">
     <TextView
         android:layout_width="match_parent"
@@ -50,7 +51,8 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:layout_centerInParent="false">
             <ImageButton
                 android:layout_width="30dp"
                 android:layout_height="30dp"

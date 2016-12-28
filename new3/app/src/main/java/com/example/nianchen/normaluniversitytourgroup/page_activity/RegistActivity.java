@@ -65,11 +65,11 @@ public class RegistActivity extends Activity {
     public void findview(){
         username=(EditText)findViewById(R.id.username);
         password=(EditText)findViewById(R.id.password);
-        regist=(Button)findViewById(R.id.regist);
+//        regist=(Button)findViewById(R.id.regist);
 //        gologin=(Button)findViewById(R.id.gologin);
     }
     public void setlisenter(){
-        regist.setOnClickListener(mylistener);
+//        regist.setOnClickListener(mylistener);
         gologin.setOnClickListener(mylistener);
     }
 

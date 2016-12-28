@@ -1,17 +1,16 @@
 package com.example.nianchen.normaluniversitytourgroup;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
-import android.view.ViewStructure;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.nianchen.normaluniversitytourgroup.fragment.AttFragment;
 import com.example.nianchen.normaluniversitytourgroup.fragment.FindFragment;
@@ -19,7 +18,6 @@ import com.example.nianchen.normaluniversitytourgroup.fragment.HomeFragment;
 import com.example.nianchen.normaluniversitytourgroup.fragment.MesFragment;
 import com.example.nianchen.normaluniversitytourgroup.fragment.MyFragment;
 import com.example.nianchen.normaluniversitytourgroup.page_activity.OppositeActivity;
-import com.hyphenate.EMContactListener;
 import com.hyphenate.EMMessageListener;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.chat.EMConversation;
@@ -36,7 +34,7 @@ public class MainActivity extends Activity {
     private HomeFragment mHome;
     private FindFragment mFind;
     private MyFragment mMy;
-    private MesFragment mMes;
+
     private AttFragment mAtt;
     private TextView unreadLabel;
     private LinearLayout liner_home;
@@ -55,6 +53,8 @@ public class MainActivity extends Activity {
     private boolean isCurrentAccountRemoved = false;
     private int currentTabIndex;
     private FindFragment conversationListFragment;
+    private MesFragment mMes;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,6 +64,8 @@ public class MainActivity extends Activity {
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         //透明导航栏
 //        getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
+        if(!isNetWorkAvailable(this))
+            Toast.makeText(MainActivity.this,"无法连接网络",Toast.LENGTH_SHORT).show();
         //获取界面控件
         getViews();
         //注册事件监听器
@@ -286,7 +288,17 @@ private void refreshUIWithMessage() {
         EMClient.getInstance().chatManager().addMessageListener(messageListener);
     }
     //监听结束
-
+    public static boolean isNetWorkAvailable(final Context context) {
+        Runtime runtime = Runtime.getRuntime();
+        try {
+            Process pingProcess = runtime.exec("/system/bin/ping -c 1 www.baidu.com");
+            int exitCode = pingProcess.waitFor();
+            return (exitCode == 0);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
     @Override
     protected void onDestroy() {
         super.onDestroy();

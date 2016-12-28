@@ -65,6 +65,11 @@ public class MyFragment extends Fragment{
                 Toast.makeText(getActivity(),"退出成功",Toast.LENGTH_LONG).show();
                 getActivity().finish();
             }
+            else if(msg.what==3){
+                mDialog.dismiss();
+                Toast.makeText(getActivity(),"退出失败，请重试",Toast.LENGTH_LONG).show();
+                getActivity().finish();
+            }
             else{
                 Toast.makeText(getActivity(),"上传成功！",Toast.LENGTH_LONG).show();
                 mynick.setText(strnick.toString().trim());
@@ -76,11 +81,11 @@ public class MyFragment extends Fragment{
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
             String str=(String )msg.obj;
-            if(str!=null){
-                mynick.setText(str.toString().trim());
+            if(str.equals("null")){
+                mynick.setText("空");
             }
             else
-                mynick.setText("空");
+            mynick.setText(str.toString().trim());
         }
     };
     private String strnick;
@@ -188,7 +193,9 @@ public class MyFragment extends Fragment{
 
             @Override
             public void onError(int i, String s) {
-
+                Message msg=new Message();
+                msg.what=3;
+                myhandler1.sendMessage(msg);
             }
 
             @Override

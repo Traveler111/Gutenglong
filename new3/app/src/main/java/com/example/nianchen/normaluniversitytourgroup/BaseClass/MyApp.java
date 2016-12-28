@@ -165,6 +165,10 @@ public class MyApp extends Application {
             Log.e("nick",nick);
             Log.e("imgname",imgname);
             Log.e("gg",gg);
+            if(nick.equals("null")){
+                Log.e("null","run");
+            }
+            else
             user.setNick(nick);
             user.setAvatar("http://123.207.228.232/blog/testpic?img="+imgname+"&gg="+gg);
         }

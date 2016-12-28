@@ -86,7 +86,7 @@
         <activity android:name=".page_activity.ChatActivity" />
         <activity android:name=".page_activity.MyGroup" />
         <activity android:name=".ChooseActivity" />
-
+        <activity android:name="com.hyphenate.easeui.ui.EaseBaiduMapActivity"/>
         <meta-data
             android:name="EASEMOB_APPKEY"
             android:value="1199161114115912#huanxintest" />

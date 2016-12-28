@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.nianchen.normaluniversitytourgroup.BaseClass.FriendOne;
+import com.example.nianchen.normaluniversitytourgroup.BaseClass.Friendlistadapter;
 import com.example.nianchen.normaluniversitytourgroup.BaseClass.Myfriendzzx;
 import com.example.nianchen.normaluniversitytourgroup.R;
 
@@ -19,13 +20,13 @@ import java.util.List;
  * Created by nianchen on 2016/11/24.
  */
 public class MesFragmentContactAdapter extends BaseAdapter {
-    private ArrayList<Myfriendzzx> friends1=new ArrayList<>();
+    private ArrayList<Friendlistadapter> friends1=new ArrayList<>();
     private Context c;
     private ImageView img;
     private TextView name;
     private TextView desc;
 
-    public MesFragmentContactAdapter(ArrayList<Myfriendzzx> friends1, Context c) {
+    public MesFragmentContactAdapter(ArrayList<Friendlistadapter> friends1, Context c) {
         this.friends1 = friends1;
         this.c = c;
     }
@@ -51,9 +52,12 @@ public class MesFragmentContactAdapter extends BaseAdapter {
             convertView= LayoutInflater.from(c).inflate(R.layout.array_item_one,null);
         }
         img = (ImageView) convertView.findViewById(R.id.hearder1);
-        img.setImageResource(friends1.get(position).getImg());
+        if(friends1.get(position).getImg()!=null)
+        img.setImageBitmap(friends1.get(position).getImg());
+        else
+        img.setImageResource(R.drawable.loginhead);
         name = (TextView) convertView.findViewById(R.id.name1);
-        name.setText(friends1.get(position).getName().toString());
+        name.setText(friends1.get(position).getUsername().toString());
 
         return convertView;
     }

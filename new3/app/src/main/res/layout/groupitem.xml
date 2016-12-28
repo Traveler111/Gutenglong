@@ -2,33 +2,39 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="horizontal" android:layout_width="match_parent"
     android:descendantFocusability="blocksDescendants"
-    android:layout_height="100dp">
-<ImageView
+    android:layout_height="100dp"
+    android:background="@drawable/shape">
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/shape_ljh">
+<com.example.nianchen.normaluniversitytourgroup.BaseClass.CircleImageView
     android:layout_width="100dp"
     android:layout_height="100dp"
     android:id="@+id/img"/>
+    </LinearLayout>
     <LinearLayout
         android:orientation="vertical"
 
         android:layout_width="150dp"
         android:layout_height="match_parent">
         <TextView
+            android:layout_marginLeft="40dp"
+            android:gravity="center"
             android:layout_weight="1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/groupname"/>
+            android:id="@+id/groupname"
+            android:textColor="#00aaff"/>
         <TextView
+            android:textColor="#00aaff"
+            android:layout_marginLeft="40dp"
+            android:gravity="center"
             android:layout_weight="1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/groupdesc"/>
     </LinearLayout>
 
-    <ImageView
-        android:text="删除"
-        android:textSize="16dp"
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:background="@drawable/logo"
-        android:id="@+id/delete" />
+
 </LinearLayout>

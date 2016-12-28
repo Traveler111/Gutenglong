@@ -60,14 +60,14 @@ public class FindAdapter extends BaseAdapter {
         name=(TextView) convertView.findViewById(R.id.name1);
         name.setText(friends.get(position).getName().toString());
         desc=(TextView) convertView.findViewById(R.id.desc1);
-        delete=(ImageView)convertView.findViewById(R.id.delete);
-        delete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                        deletefriend();
-                Toast.makeText(c,"onclick",Toast.LENGTH_LONG).show();
-            }
-        });
+//        delete=(ImageView)convertView.findViewById(R.id.delete);
+//        delete.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                        deletefriend();
+//                Toast.makeText(c,"onclick",Toast.LENGTH_LONG).show();
+//            }
+//        });
         return convertView;
     }
     public void deletefriend(){
